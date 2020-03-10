@@ -1,11 +1,23 @@
 import React from 'react';
+import {
+  Switch,
+  Route,
+} from 'react-router-dom';
+import {
+  Header,
+  Footer,
+  Home,
+} from './components';
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div>
-      .rsk domains batch
-    </div>
-  );
-}
+const App = () => (
+  <>
+    <Header />
+    <Switch>
+      <Route exact path="/" render={() => <Home />} />
+    </Switch>
+    <Footer />
+  </>
+);
 
-export default App;
+export default connect()(App);
