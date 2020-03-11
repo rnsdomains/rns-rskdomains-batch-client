@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import ChooseDomains from './ChooseDomains';
 
 export default () => (
   <Container style={{ textAlign: 'center' }}>
@@ -11,12 +12,7 @@ export default () => (
     <Row>
       <Col>
         <h3>Choose domains</h3>
-      </Col>
-    </Row>
-    <Row><Col><hr /></Col></Row>
-    <Row>
-      <Col>
-        <h3>Validate domains</h3>
+        <ChooseDomains />
       </Col>
     </Row>
     <Row><Col><hr /></Col></Row>
@@ -32,5 +28,4 @@ export default () => (
       </Col>
     </Row>
   </Container>
-)
-
+);

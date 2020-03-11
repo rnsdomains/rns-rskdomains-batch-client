@@ -1,0 +1,1 @@
+export const LABELS_AVAILABLE = 'LABELS_AVAILABLE';
