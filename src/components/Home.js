@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ChooseDomains from './ChooseDomains';
 import CalculatePrice from './CalculatePrice';
+import ChooseOwner from './ChooseOwner';
 
 export default () => (
   <Container style={{ textAlign: 'center' }}>
@@ -21,6 +22,13 @@ export default () => (
       <Col>
         <h3>Calculate price</h3>
         <CalculatePrice />
+      </Col>
+    </Row>
+    <Row><Col><hr /></Col></Row>
+    <Row>
+      <Col>
+        <h3>Choose owner</h3>
+        <ChooseOwner />
       </Col>
     </Row>
     <Row><Col><hr /></Col></Row>
