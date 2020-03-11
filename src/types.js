@@ -1,1 +1,2 @@
 export const LABELS_AVAILABLE = 'LABELS_AVAILABLE';
+export const CONFIRM_PRICE = 'CONFIRM_PRICE';

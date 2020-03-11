@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Alert, Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import CSVReader from 'react-csv-reader';
 import Web3 from 'web3';
 import { labelsAvailable } from '../actions';
@@ -89,6 +89,8 @@ class ChooseDomains extends Component {
 
   confirm() {
     const { unconfirmedLabels } = this.state;
+    const { labelsAvailable } = this.props;
+
     this.setState({ confirmed: unconfirmedLabels.length });
     labelsAvailable(unconfirmedLabels);
   }
@@ -121,17 +123,15 @@ class ChooseDomains extends Component {
       </>;
     } else if (unconfirmedLabels && confirmed !== 0) {
       inner = <p>Confirmed domains to register: {confirmed}</p>;
+    } else {
+      throw new Error('Unhandled state.');
     }
 
     return (
-      <Container>
-        <Row>
-          <Col>
-            <p>Upload <code>csv</code> file with one column containing the labels to register. Ensure not to use .rsk at the end, lower cases, and no spaces.</p>
-            {inner}
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <p>Upload <code>csv</code> file with one column containing the labels to register. Ensure not to use .rsk at the end, lower cases, and no spaces.</p>
+        {inner}
+      </>
     )
   }
 }

@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-export const LABELS_AVAILABLE = 'LABELS_AVAILABLE';
+import { LABELS_AVAILABLE, CONFIRM_PRICE } from './types';
 
 const initialState = {
   labels: null,
+  confirmedPrice: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         labels: action.labels
       };
+    case CONFIRM_PRICE:
+      return {
+        ...state,
+        confirmedPrice: true,
+      }
     default: return state;
   }
 };
