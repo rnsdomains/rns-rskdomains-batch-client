@@ -3,14 +3,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ChooseDomains from './ChooseDomains';
 import CalculatePrice from './CalculatePrice';
 import ChooseOwner from './ChooseOwner';
+import ExecuteRegistrations from './ExecuteRegistrations';
 
 export default () => (
   <Container style={{ textAlign: 'center' }}>
-    <Row>
-      <Col>
-        <h1>.rsk domains batch</h1>
-      </Col>
-    </Row>
     <Row>
       <Col>
         <h3>Choose domains</h3>
@@ -35,6 +31,7 @@ export default () => (
     <Row>
       <Col>
         <h3>Execute registration</h3>
+        <ExecuteRegistrations />
       </Col>
     </Row>
   </Container>

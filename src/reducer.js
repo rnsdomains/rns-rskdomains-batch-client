@@ -1,11 +1,22 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { LABELS_AVAILABLE, CONFIRM_PRICE, CONFIRM_ADDRESS } from './types';
+import {
+  LABELS_AVAILABLE,
+  CONFIRM_PRICE,
+  CONFIRM_ADDRESS,
+  SUCCESS_COMMITMENT,
+  READY,
+} from './types';
 
 const initialState = {
   labels: null,
   confirmedPrice: false,
-  ownerAddress: null
+  duration: 0,
+  cost: null,
+  totalRif: null,
+  ownerAddress: null,
+  missingCommitmentConfirmations: -1,
+  missingRegisterConfirmations: -1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,12 +30,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         confirmedPrice: true,
+        duration: action.duration,
+        cost: action.cost,
+        totalRif: action.totalRif,
       }
     case CONFIRM_ADDRESS:
       return {
         ...state,
         ownerAddress: action.ownerAddress,
       }
+    case READY:
+      return {
+        ...state,
+        missingCommitmentConfirmations: action.commitmentAmount,
+        missingRegisterConfirmations: action.registerAmount,
+      }
+    case SUCCESS_COMMITMENT:
+      return {
+        ...state,
+        missingCommitmentConfirmations: state.missingCommitmentConfirmations-1,
+      };
     default: return state;
   }
 };

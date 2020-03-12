@@ -20,7 +20,7 @@ class ChooseOwner extends Component {
   handleChangeAddress(event) {
     const address = event.target.value;
 
-    if (isValidChecksumAddress(address, 30)) {
+    if (isValidChecksumAddress(address, process.env.REACT_APP_NETWORK_ID)) {
       this.setState(({ address, error: null }));
     } else {
       this.setState({ error: 'Invalid address' });

@@ -5,7 +5,7 @@ import CSVReader from 'react-csv-reader';
 import Web3 from 'web3';
 import { labelsAvailable } from '../actions';
 
-const web3 = new Web3('https://public-node.rsk.co');
+const web3 = new Web3(process.env.REACT_APP_RSK_NODE);
 const rskOwner = new web3.eth.Contract([
   {
     "constant": true,
@@ -28,7 +28,7 @@ const rskOwner = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x45d3e4fb311982a06ba52359d44cb4f5980e0ef1')
+], process.env.REACT_APP_RSKOWNER_ADDRESS)
 
 async function available (label) {
   return rskOwner.methods.available(web3.utils.sha3(label)).call();

@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import Web3 from 'web3';
 import { confirmPrice } from '../actions';
 
-const web3 = new Web3('https://public-node.rsk.co');
+const web3 = new Web3(process.env.REACT_APP_RSK_NODE);
 const fifsRegistrar = new web3.eth.Contract([
   {
     "constant": true,
@@ -37,7 +37,7 @@ const fifsRegistrar = new web3.eth.Contract([
     "stateMutability": "view",
     "type": "function"
   }
-], '0x779195c53cc7c1a33bd2eea5f63f2c1da8798d61')
+], process.env.REACT_APP_FIFS_ADDRESS)
 
 async function getPrice(duration) {
   return fifsRegistrar.methods.price('', 0, duration).call();
@@ -51,6 +51,8 @@ class CalculatePrice extends Component {
       durationInput: 1,
       duration: 0,
       price: null,
+      costOfOne: null,
+      totalRif: null,
     }
 
     this.handleDurationChange = this.handleDurationChange.bind(this);
@@ -73,7 +75,8 @@ class CalculatePrice extends Component {
     getPrice(duration).then(price => {
       const decimals = web3.utils.toBN('1000000000000000000');
 
-      const rif = web3.utils.toBN(price).mul(web3.utils.toBN(labels.length)).div(decimals);
+      const totalRif = web3.utils.toBN(price)
+      const rif = totalRif.mul(web3.utils.toBN(labels.length)).div(decimals);
 
       const gasPrice = web3.utils.toBN('60000000');
       const gas = web3.utils.toBN('6800000');
@@ -82,13 +85,15 @@ class CalculatePrice extends Component {
 
       const rbtc = web3.utils.toBN(gasPrice.mul(gas).mul(commits.add(reveals)));
 
-      this.setState({ price: { rif, rbtc }});
+      this.setState({ costOfOne: price, price: { rif, rbtc }, totalRif });
     })
   }
 
   confirm() {
     const { confirmPrice } = this.props;
-    confirmPrice();
+    const { duration, costOfOne, totalRif } = this.state;
+
+    confirmPrice(web3.utils.toBN(duration), web3.utils.toBN(costOfOne), totalRif);
   }
 
   render() {
@@ -124,7 +129,7 @@ const mapStateToProps = ({ app }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  confirmPrice: () => dispatch(confirmPrice()),
+  confirmPrice: (duration, cost, totalRif) => dispatch(confirmPrice(duration, cost, totalRif)),
 });
 
 export default connect(
