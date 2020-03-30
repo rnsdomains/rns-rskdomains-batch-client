@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
 import {
   LABELS_AVAILABLE,
   CONFIRM_PRICE,
@@ -54,7 +53,6 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default (history) => combineReducers({
-  router: connectRouter(history),
+export default () => combineReducers({
   app: reducer,
 });

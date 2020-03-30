@@ -1,9 +1,5 @@
 import React from 'react';
 import {
-  Switch,
-  Route,
-} from 'react-router-dom';
-import {
   Header,
   Footer,
   Home,
@@ -13,9 +9,7 @@ import { connect } from 'react-redux';
 const App = () => (
   <>
     <Header />
-    <Switch>
-      <Route exact path="/" render={() => <Home />} />
-    </Switch>
+    <Home />
     <Footer />
   </>
 );
