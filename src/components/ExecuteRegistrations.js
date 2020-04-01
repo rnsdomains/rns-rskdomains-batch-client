@@ -200,9 +200,11 @@ function encodeRegister(labels, owner, secrets, duration, cost) {
     datas.push(encodeOneRegister(labels[i], owner, secrets[i], duration));
   }
 
+  const data = `0x${rlp.encode([cost, datas]).toString('hex')}`;
+
   return {
     size: labels.length,
-    data: `0x${rlp.encode([cost, datas]).toString('hex')}`
+    data
   };
 }
 
@@ -215,6 +217,7 @@ class ExecuteRegistrations extends Component {
       chunkedCommitments: null,
       chunkedDatas: null,
       from: null,
+      startedPolling: false,
       canReveal: false,
       batch: null,
       rif: null,
@@ -308,10 +311,10 @@ class ExecuteRegistrations extends Component {
     this.setState({ batch, rif });
   }
 
-  shouldComponentUpdate({ missingCommitmentConfirmations }, { canReveal }) {
-    if (missingCommitmentConfirmations === 0 && !canReveal) {
+  shouldComponentUpdate({ missingCommitmentConfirmations }, { canReveal, startedPolling }) {
+    if (missingCommitmentConfirmations === 0 && !canReveal && !startedPolling) {
       const { chunkedCommitments } = this.state;
-      pollUntilCommitted(chunkedCommitments).then(() => this.setState({ canReveal: true }));
+      pollUntilCommitted(chunkedCommitments, 5000, 1200000).then(() => this.setState({ canReveal: true, startedPolling: true }));
     }
 
     return true;
