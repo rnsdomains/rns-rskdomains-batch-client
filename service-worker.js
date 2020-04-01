@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/rns-rskdomains-batch-client/precache-manifest.42815ce89652e411eac2c0776d3274c1.js"
+  "/rns-rskdomains-batch-client/precache-manifest.5984309c51e79ab42f143fdf89919d52.js"
 );
 
 self.addEventListener('message', (event) => {
