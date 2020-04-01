@@ -2,10 +2,12 @@
   "name": "rns-rskdomains-batch-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rnsdomains.github.io/rns-rskdomains-batch-client",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "gh-pages": "^2.2.0",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-csv-reader": "^2.0.2",
@@ -21,9 +23,12 @@
   "scripts": {
     "start:testnet": "env-cmd -f .env.testnet react-scripts start",
     "start:mainnet": "env-cmd -f .env.mainnet react-scripts start",
-    "build": "react-scripts build",
+    "build:testnet": "env-cmd -f .env.testnet react-scripts build",
+    "build:mainnet": "env-cmd -f .env.mainnet react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build:mainnet",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
