@@ -8,6 +8,7 @@ class BatchExecutionComponent extends Component{
     this.state = {
       tx: null,
       confirmed: false,
+      error: null,
     };
 
     this.commit = this.commit.bind(this);
@@ -17,18 +18,30 @@ class BatchExecutionComponent extends Component{
     const { method, success, sender } = this.props;
 
     method.send({ from: sender })
-    .on('transactionHash', tx => {
-      this.setState({ tx });
-    })
-    .on('receipt', _ => {
-      this.setState({ confirmed: true });
-      success();
-    });
+      .on('transactionHash', tx => {
+        this.setState({ tx });
+
+        const checkInterval = setInterval(() => {
+          window.ethereum.sendAsync({
+            method: 'eth_getTransactionByHash',
+            params: [tx],
+          }, (error, response) => {
+            if (error) {
+              this.setState({ error })
+            } else if (response && response.result && response.result.blockNumber) {
+              this.setState({ confirmed: true });
+              success();
+              clearInterval(checkInterval);
+            }
+          });
+        }, 2000);
+      })
+      .catch(error => this.setState({ error }))
   }
 
   render () {
     const { from, to } = this.props;
-    const { tx, confirmed } = this.state;
+    const { tx, confirmed, error } = this.state;
 
     return <>
       <Row>
@@ -44,6 +57,7 @@ class BatchExecutionComponent extends Component{
           </Row>
           <Row>
             <Col>
+              {error}
               {
                 confirmed ? <p>Confirmed!</p> : <p>Waiting for confirmations...</p>
               }

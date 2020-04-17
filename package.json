@@ -2,7 +2,7 @@
   "name": "rns-rskdomains-batch-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rnsdomains.github.io/rns-rskdomains-batch-client",
+  "homepage": "https://rnsdomains.github.io/rns-rskdomains-batch-client/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
