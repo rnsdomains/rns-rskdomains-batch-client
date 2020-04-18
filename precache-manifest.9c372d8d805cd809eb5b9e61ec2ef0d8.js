@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "575e1c32f4ac1a0969b3e6752fe5c976",
+    "revision": "51af6be09c84d8e3e234c43162ce7e14",
     "url": "/rns-rskdomains-batch-client/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/rns-rskdomains-batch-client/static/js/2.f63fd217.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "db1ae93e4038be77f1a6",
-    "url": "/rns-rskdomains-batch-client/static/js/main.0bf89165.chunk.js"
+    "revision": "36619221dbefc8ba7def",
+    "url": "/rns-rskdomains-batch-client/static/js/main.349310d6.chunk.js"
   },
   {
     "revision": "5040da26e1bea4dbc838",
