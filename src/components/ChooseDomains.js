@@ -63,8 +63,14 @@ class ChooseDomains extends Component {
     for (let i = 0; i < labels.length; i += 1) {
       const label = labels[i];
 
-      if (!label.length >= 5 || !label.match(/^[0-9a-z]+$/)) {
-        return this.error(`Invalid domain: ${label}`);
+      if (label.length < 5) {
+        this.error(`Invalid domain: ${label}. Domains must have a minimum length of 5 characters.`);
+        return;
+      }
+
+      if (!(label.length >= 5) || !label.match(/^[0-9a-z]+$/)) {
+        this.error(`Invalid domain: ${label}. Domains must be combination of 0-9 a-z.`);
+        return;
       }
     }
 
