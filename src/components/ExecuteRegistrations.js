@@ -8,7 +8,7 @@ import BatchExecutionComponent from './BatchExecutionComponent';
 const rlp = require('rlp');
 
 const commitmentChunkSize = 250;
-const registerChunkSize = 35;
+const registerChunkSize = 30;
 
 const web3 = new Web3(process.env.REACT_APP_RSK_NODE);
 const fifsRegistrar = new web3.eth.Contract([
